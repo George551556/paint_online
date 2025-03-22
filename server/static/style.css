@@ -103,6 +103,10 @@ a{
     background-color: cornflowerblue;
     color: azure;
 }
+.btn-red{
+    background-color: rgb(217, 20, 20);
+    color: azure;
+}
 .btn:hover{
     box-shadow: 0px 0px 2px 2px #bbb;
 }

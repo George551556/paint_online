@@ -130,6 +130,17 @@ io.sockets.on('connection',function (socket) {
             socket.emit('paint paths',JSON.stringify(paths));
             socket.broadcast.emit('paint paths',JSON.stringify(paths));
         });
+        //这里新增一个函数，判断输入的密码是否正确，从而清除画面所有用户的paths
+        socket.on('remove all paths',function () {
+            if(this.name === 'root'){
+                paths.clear();
+                socket.emit('server msg','操作成功！');
+                socket.broadcast.emit('paint paths',JSON.stringify(paths));
+                socket.emit('paint paths',JSON.stringify(paths));
+            }else{
+                socket.emit('server msg','密码错误！');
+            }
+        });        
         socket.on('move my paint',function (x,y) {
             var _paths = paths.get(socket.id) || [];
             _paths.forEach(ele=>{
