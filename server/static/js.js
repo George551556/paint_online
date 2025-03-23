@@ -148,8 +148,18 @@ Ctl = {
         canvas.pts=[];
         canvas.color = 'black';
         canvas.lw = 1;
-        for(var i=0;i<20;i++)
-            this.addColor();
+        // 定义20个常用颜色
+        var colorsList = [
+            '#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082', '#9400D3', // 七种彩虹颜色
+            '#FFC0CB', '#FFA500', '#FFFF99', '#00FFFF', '#ADD8E6', '#FFB6C1', '#FFD700', // 其他常用颜色
+            '#800000', '#808000', '#008000', '#008080', '#000080', '#800080' // 其他常用颜色
+        ];
+        // 添加颜色
+        for (var i = 0; i < colorsList.length; i++) {
+            this.addColor(colorsList[i]);
+        }
+        this.addColor('#FFFFFF'); // 添加白色
+        this.addColor('#000000', true); // 添加白色
     },
     setLw(lw){
         canvas.lw = lw;
@@ -166,12 +176,13 @@ Ctl = {
     clearPos : function () {
         canvas.pts = []
     },
-    addColor : function (active) {
-        var rect = document.createElement('div'),r = this.random;
+    addColor : function (color, active) {
+        var rect = document.createElement('div');
         rect.className = 'rect';
-        if(active)
-            rect.className+=' active';
-        rect.style.backgroundColor = 'rgb('+[r(256),r(256),r(256)].join(',')+')';
+        if (active) {
+            rect.className += ' active'; // 如果是白色，添加active类
+        }
+        rect.style.backgroundColor = color;
         colors.appendChild(rect);
     },
     random : function (b) {
