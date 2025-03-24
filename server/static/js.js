@@ -119,6 +119,14 @@ colors.addEventListener('click',function (e) {
         Ctl.setColor(t.style.backgroundColor);
     }
 });
+
+//监测滚轮，修改ranger的值
+canvas.onmousewheel = function (e) {
+    var delta = e.wheelDelta;
+    ranger.value = parseInt(ranger.value) + delta/120;
+    ranger.dispatchEvent(new Event('change')); //手动触发一个change事件，以便执行下面的事件处理函数
+}
+
 ranger.addEventListener('change',function (e) {
     this.nextElementSibling.innerText = this.value;
     Ctl.setLw(this.value);
